@@ -1,5 +1,7 @@
 # KeyValueBundle
 
+<!-- TODO (Symfony 8.1): consolidate KeyValueAdd, KeyValueRemove, KeyValueShow into a single file using multiple #[AsCommand] attributes on the same class, once that's supported. -->
+
 Flexible bundle to handle Key Value(s) list, e.g. a dynamic list of ips and paths to block bad bots.
 
 Highly inspired by  lsbproject/blacklist-bundle https://github.com/AntoineLemaire/BlacklistBundle

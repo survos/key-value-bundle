@@ -1,34 +1,31 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Survos\KeyValueBundle\Command;
 
 use Survos\KeyValueBundle\Entity\KeyValueManagerInterface;
+use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-#[AsCommand('survos:key-value:add', 'Add data to key/value storage', aliases: ['kv:add'])]
-class KeyValueAdd extends BaseKeyValue
+#[AsCommand('survos:key-value:add', 'Add data to key/value storage', ['kv:add'])]
+final class KeyValueAdd
 {
-    protected function configure(): void
+    public function __construct(private readonly KeyValueManagerInterface $kvManager)
     {
-        $this
-            ->addArgument('value', InputArgument::REQUIRED, 'Value to be blocked')
-            ;
-        parent::configure();
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
+    public function __invoke(
+        SymfonyStyle $io,
+        #[Argument('Value to add')] string $value,
+        #[Argument('KeyValue type, e.g. "email"')] ?string $type = null,
+    ): int {
+        $type ??= $this->kvManager->getDefaultList();
+        $this->kvManager->add($value, $type);
+        $io->success("Added $type $value");
 
-        $this->kvManager->add(
-            $value = $this->getValue($input),
-            $type  = $this->getType($input)
-        );
-        (new SymfonyStyle($input, $output))->success("Added $type $value");
-        return self::SUCCESS;
+        return Command::SUCCESS;
     }
 }
