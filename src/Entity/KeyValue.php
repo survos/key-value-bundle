@@ -1,6 +1,7 @@
-<?php declare(strict_types=1);
+<?php
 
-// good candidate for php 8.4!
+declare(strict_types=1);
+
 
 namespace Survos\KeyValueBundle\Entity;
 
@@ -12,56 +13,41 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: KeyValueRepository::class)]
 #[ORM\Table]
 #[ORM\UniqueConstraint(name: 'kv_type_value', columns: ['type', 'value'])]
-// should values be indexed, for faster lookup
 class KeyValue implements \Stringable
 {
-    /**
-     *
-     * @todo: hash string for integration with service
-     *
-     * @var int
-     */
     #[ORM\Id]
     #[ORM\GeneratedValue()]
     #[ORM\Column(type: 'integer')]
-    protected int $id;
+    protected ?int $id = null;
 
     public function __construct(
-        /**
-         * @var string|null
-         */
-        #[ORM\Column(type: 'string', nullable: false)]
+        #[ORM\Column(type: 'string', length: 1024, nullable: false)]
         #[Assert\NotBlank]
-        protected        $value,
+        protected string $value,
 
-        /**
-         * @var string|null
-         */
         #[ORM\Column(type: 'string', length: 255, nullable: false)]
         #[Assert\NotBlank]
         protected string $type,
-
-    )
-    {
+    ) {
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     public function getValue(): string
     {
-        return $this->value ?? '';
+        return $this->value;
     }
 
     public function getType(): string
     {
-        return $this->type ?? '';
+        return $this->type;
     }
 
     public function __toString(): string
     {
-        return sprintf("%s/%s", $this->type, $this->getValue());
+        return sprintf('%s/%s', $this->type, $this->value);
     }
 }

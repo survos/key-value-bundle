@@ -10,7 +10,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-#[AsCommand('survos:key-value:show', 'List kv entities by list name', ['kv:show'])]
+#[AsCommand('survos:key-value:show', 'List kv entities by list name', ['kv:show', 'survos:kv:show'])]
 final class KeyValueShow
 {
     public function __construct(private readonly KeyValueManagerInterface $kvManager)

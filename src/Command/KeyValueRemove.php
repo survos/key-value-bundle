@@ -10,7 +10,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-#[AsCommand('survos:key-value:remove', 'Remove data from key/value storage', ['kv:remove'])]
+#[AsCommand('survos:key-value:remove', 'Remove data from key/value storage', ['kv:remove', 'survos:kv:remove'])]
 final class KeyValueRemove
 {
     public function __construct(private readonly KeyValueManagerInterface $kvManager)
