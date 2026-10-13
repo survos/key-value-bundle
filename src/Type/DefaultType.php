@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Survos\KeyValueBundle\Type;
 
@@ -7,11 +9,9 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
- * Default type used to be a fallback type for validator
+ * Default type used to be a fallback type for validator.
  *
  * Class DefaultType
- *
- * @package Survos\KeyValueBundle\Type
  */
 class DefaultType implements TypeInterface
 {
@@ -29,7 +29,7 @@ class DefaultType implements TypeInterface
         string $value,
         Constraint $constraint,
         ExecutionContextInterface &$context,
-        KeyValueManagerInterface $manager
+        KeyValueManagerInterface $manager,
     ): void {
         if ($manager->has($value, $constraint->type, $constraint->caseSensitive)) {
             $context->buildViolation($constraint->message)->addViolation();

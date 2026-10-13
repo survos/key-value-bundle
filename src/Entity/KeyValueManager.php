@@ -71,7 +71,7 @@ class KeyValueManager implements KeyValueManagerInterface
         $type ??= $this->getDefaultList();
 
         if ($this->isStrict()) {
-            $validLists = array_map(static fn(array $config): string => $config['name'], $this->config['lists']);
+            $validLists = array_map(static fn (array $config): string => $config['name'], $this->config['lists']);
             if (!in_array($type, $validLists, true)) {
                 throw new \LogicException(sprintf("Type '%s' is not allowed: %s", $type, implode(', ', $validLists)));
             }
@@ -88,7 +88,6 @@ class KeyValueManager implements KeyValueManagerInterface
         }
     }
 
-    /** {@inheritDoc} */
     public function getList(?string $type = null): array
     {
         $type ??= $this->getDefaultList();

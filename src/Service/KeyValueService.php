@@ -12,7 +12,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class KeyValueService
 {
-    public function __construct(private readonly KeyValueManagerInterface $kvManager) {}
+    public function __construct(private readonly KeyValueManagerInterface $kvManager)
+    {
+    }
 
     #[AsCommand('survos:kv:add', 'Add a value to a key/value list', ['kv:add', 'survos:key-value:add'])]
     public function add(
@@ -36,7 +38,8 @@ final class KeyValueService
         $type ??= $this->kvManager->getDefaultList();
 
         if (!$this->kvManager->has($value, $type)) {
-            $io->warning('Key value "' . $type . '/' . $value . '" does not exist.');
+            $io->warning('Key value "'.$type.'/'.$value.'" does not exist.');
+
             return Command::SUCCESS;
         }
 
@@ -53,7 +56,7 @@ final class KeyValueService
     ): int {
         if ($type) {
             $list = $this->kvManager->getList($type);
-            $io->table([$type], array_map(fn($item) => [$item], $list));
+            $io->table([$type], array_map(fn ($item) => [$item], $list));
         } else {
             $list = $this->kvManager->getTypes();
             $io->table(['type', 'count'], $list);

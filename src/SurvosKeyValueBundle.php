@@ -18,9 +18,9 @@ use Survos\KeyValueBundle\Validator\Constraints\IsNotBlacklistedValidator;
 use Survos\KeyValueBundle\Validator\Constraints\IsNotKeyValueedValidator;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
+use Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
-use Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
@@ -84,7 +84,6 @@ final class SurvosKeyValueBundle extends AbstractBundle implements CompilerPassI
     {
         $container->addCompilerPass($this, PassConfig::TYPE_BEFORE_OPTIMIZATION);
     }
-
 
     public function process(ContainerBuilder $container): void
     {

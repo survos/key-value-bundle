@@ -1,14 +1,16 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Survos\KeyValueBundle\Tests\Validator\Constraints;
 
+use PHPUnit\Framework\MockObject\Matcher\InvokedCount;
+use PHPUnit\Framework\TestCase;
 use Survos\KeyValueBundle\Entity\KeyValueManagerInterface;
 use Survos\KeyValueBundle\Type\TypeInterface;
 use Survos\KeyValueBundle\Utils\TypeExtractor;
 use Survos\KeyValueBundle\Validator\Constraints\IsNotKeyValueed;
 use Survos\KeyValueBundle\Validator\Constraints\IsNotKeyValueedValidator;
-use PHPUnit\Framework\MockObject\Matcher\InvokedCount;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Context\ExecutionContextInterface as ExecutionContextInterfaceAlias;
 
 class IsNotKeyValueedValidatorTest extends TestCase

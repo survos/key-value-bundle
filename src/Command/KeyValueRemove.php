@@ -25,7 +25,8 @@ final class KeyValueRemove
         $type ??= $this->kvManager->getDefaultList();
 
         if (!$this->kvManager->has($value, $type)) {
-            $io->warning('Key value "' . $type . '/' . $value . '" does not exist.');
+            $io->warning('Key value "'.$type.'/'.$value.'" does not exist.');
+
             return Command::SUCCESS;
         }
 

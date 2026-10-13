@@ -23,7 +23,7 @@ final class KeyValueShow
     ): int {
         if ($type) {
             $list = $this->kvManager->getList($type);
-            $io->table([$type], array_map(fn($item) => [$item], $list));
+            $io->table([$type], array_map(fn ($item) => [$item], $list));
         } else {
             $list = $this->kvManager->getTypes();
             $io->table(['type', 'count'], $list);

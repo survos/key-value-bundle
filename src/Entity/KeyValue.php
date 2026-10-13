@@ -28,7 +28,8 @@ final class KeyValue implements \Stringable
         #[ORM\Column(type: 'string', length: 255, nullable: false)]
         #[Assert\NotBlank]
         public readonly string $type,
-    ) {}
+    ) {
+    }
 
     public function __toString(): string
     {

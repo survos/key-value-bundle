@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Survos\KeyValueBundle\Utils;
 
@@ -9,9 +11,8 @@ class TypeExtractor implements TypeExtractorInterface
     public function __construct(
         /** @var TypeInterface[] */
         private readonly array $types,
-        private readonly TypeInterface $defaultType
-    )
-    {
+        private readonly TypeInterface $defaultType,
+    ) {
     }
 
     public function extract(): array
@@ -26,6 +27,6 @@ class TypeExtractor implements TypeExtractorInterface
 
     public function extractSupported(string $type): array
     {
-        return array_filter($this->types, fn(TypeInterface $typeObject) => $typeObject->supports($type));
+        return array_filter($this->types, fn (TypeInterface $typeObject) => $typeObject->supports($type));
     }
 }

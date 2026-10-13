@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace Survos\KeyValueBundle\Validator\Constraints;
 
@@ -16,8 +18,6 @@ class IsNotKeyValueedValidator extends ConstraintValidator
     }
 
     /**
-     * {@inheritDoc}
-     *
      * @param $constraint IsNotKeyValueed
      */
     public function validate($value, Constraint $constraint): void
@@ -45,9 +45,7 @@ class IsNotKeyValueedValidator extends ConstraintValidator
     {
         if ($type->supports($constraint->type)) {
             if (!$type->satisfies($value)) {
-                throw new \InvalidArgumentException(
-                    sprintf("Value '%s' doesn't satisfy '%s' type", $value, $constraint->type)
-                );
+                throw new \InvalidArgumentException(sprintf("Value '%s' doesn't satisfy '%s' type", $value, $constraint->type));
             }
 
             $type->validate($value, $constraint, $this->context, $this->kvManager);
