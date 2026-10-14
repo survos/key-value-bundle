@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Survos\KeyValueBundle\Menu;
 
 use Survos\KeyValueBundle\Entity\KeyValue;
-use Survos\TablerBundle\Event\MenuEvent;
+use Survos\MenuBundle\Attribute\AsMenuListener;
+use Survos\MenuBundle\Event\MenuEvent;
+use Survos\MenuBundle\MenuSlot;
 use Survos\TablerBundle\Menu\AbstractAdminMenuSubscriber;
-use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
 final class KeyValueMenuSubscriber extends AbstractAdminMenuSubscriber
 {
@@ -26,7 +27,7 @@ final class KeyValueMenuSubscriber extends AbstractAdminMenuSubscriber
         return ['Key Values' => KeyValue::class];
     }
 
-    #[AsEventListener(event: MenuEvent::ADMIN_NAVBAR_MENU)]
+    #[AsMenuListener(MenuSlot::ADMIN_NAVBAR_MENU)]
     public function onAdminNavbarMenu(MenuEvent $event): void
     {
         $this->buildAdminMenu($event);
