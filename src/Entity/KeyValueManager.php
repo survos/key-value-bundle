@@ -96,7 +96,7 @@ class KeyValueManager implements KeyValueManagerInterface
             ->select(['kv.value'])
             ->andWhere('kv.type = :type')
             ->setParameter('type', $type)
-            ->orderBy('kv.value', 'ASC')
+            ->orderBy('kv.value')
             ->getQuery()
             ->getSingleColumnResult();
     }
@@ -106,7 +106,7 @@ class KeyValueManager implements KeyValueManagerInterface
         return $this->keyValueRepository->createQueryBuilder('kv')
             ->select('kv.type, count(kv.value) as count')
             ->groupBy('kv.type')
-            ->orderBy('kv.type', 'ASC')
+            ->orderBy('kv.type')
             ->getQuery()
             ->getResult();
     }
